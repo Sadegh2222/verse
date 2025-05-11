@@ -1,0 +1,8 @@
+verse/
+├── app.py               ← کد اصلی بات و سرور Flask
+├── download.py          ← اجرای SpotDL
+├── genius.py            ← گرفتن لیریک از Genius API
+├── translations.py      ← پیام‌های فارسی
+├── requirements.txt     ← پکیج‌های مورد نیاز
+├── Procfile             ← فایل مخصوص Render
+├── .env.example         ← نمونه متغیرها
