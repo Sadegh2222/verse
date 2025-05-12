@@ -1,7 +1,14 @@
 import os
+from dotenv import load_dotenv  # اضافه کردن لود کردن dotenv
 from telegram.ext import Updater, MessageHandler, Filters
 from flask import Flask
 from download import download_song
+
+# لود کردن متغیرهای محیطی از فایل .env
+load_dotenv()
+
+# گرفتن توکن بات از متغیر محیطی
+TELEGRAM_TOKEN = os.getenv("BOT_TOKEN")
 
 app = Flask(__name__)
 
