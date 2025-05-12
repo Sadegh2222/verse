@@ -1,20 +1,20 @@
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
+GENIUS_API_TOKEN = "توکن Genius شما"
 
-GENIUS_API_TOKEN = os.getenv("GENIUS_API_TOKEN")
-
-def get_lyrics(song_name):
-    search_url = f"https://api.genius.com/search?q={song_name}"
+def get_lyrics(song_title):
+    base_url = "https://api.genius.com"
+    search_url = base_url + "/search"
+    params = {'q': song_title}
     headers = {'Authorization': f'Bearer {GENIUS_API_TOKEN}'}
-    response = requests.get(search_url, headers=headers).json()
 
-    if response['response']['hits']:
-        song_url = response['response']['hits'][0]['result']['url']
-        song_page = requests.get(song_url)
-        # Parse the lyrics from the page using BeautifulSoup or regex
-        lyrics = "Lyrics not found"
-        return lyrics
-    else:
-        return "No lyrics found"
+    response = requests.get(search_url, params=params, headers=headers)
+    json = response.json()
+    
+    song_path = json['response']['hits'][0]['result']['path']
+    song_url = base_url + song_path
+
+    lyrics_response = requests.get(song_url)
+    lyrics = lyrics_response.text  # متن آهنگ
+
+    return lyrics
